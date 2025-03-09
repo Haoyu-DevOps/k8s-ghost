@@ -1,0 +1,11 @@
+apiVersion: kubeadm.k8s.io/v1beta3
+kind: ClusterConfiguration
+kubernetesVersion: v1.23.6
+controlPlaneEndpoint: "172.16.1.231:6443"  # 控制平面 IP 地址
+networking:
+  podSubnet: "10.244.0.0/16"  # Pod 网络地址，推荐使用 Flannel/CNI 默认值
+  serviceSubnet: "10.96.0.0/12"  # Kubernetes Service 网段
+apiServer:
+  extraArgs:
+    service-cluster-ip-range: "10.96.0.0/12"  # Service 网络应与 serviceSubnet 一致
+imageRepository: "registry.aliyuncs.com/google_containers"  # 使用阿里云镜像源
